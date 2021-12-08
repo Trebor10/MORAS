@@ -1,0 +1,40 @@
+CHIP MultHalf{
+    IN a[16], b[16];
+    OUT out[16];
+    
+    PARTS:
+    
+    //predznak
+    Xor(a = a[15], b = b[15], out = out[15]);
+    
+    //eksponent
+    Add16(a[0..4] = a[10..14], b[0..4] = b[10..14], out = hp);
+    TwosCompl(in[0..3] = true, in[5..15] = true, out = hp2);
+    Add16(a = hp, b = hp2, out[0..4] = hpe);
+    
+    //decimalni dio
+    Mult(a[0..4] = a[5..9], a[5] = true, b[0..4] = b[5..9], b[5] = true, 
+         out = hp3);
+    
+    Mult(a[0..4] = a[0..4], a[5] = true, b[0..4] = b[0..4], b[5] = true, 
+         out = hp4);
+     
+    BitShiftR(in = hp4, out = hp5);
+    BitShiftR(in = hp5, out = hp6);
+    BitShiftR(in = hp6, out = hp7);
+    BitShiftR(in = hp7, out = hp8);
+    BitShiftR(in = hp8, out = hp9);
+    And16(a[0..4] = true, b = hp9, out = hp10);
+    Add16(a = hp3, b = hp10, out[0..9] = hpd, out[10..15] = hp11);
+    
+    Or16(a = false, b[0..5] = hp11, out[1] = hpe3);
+    
+    Add16(a[0..4] = hpe, b[0] = true, out = hpe2);
+    
+    BitShiftR(in[0..9] = hpd, out = hpd2);
+    
+    Mux16(a[0..4] = hpe, b = hpe2, sel = hpe3 , out[0..4] = out[10..14]);
+    Mux16(a[0..9] = hpd, b = hpd2, sel = hpe3, out[0..9] = out[0..9]);
+    
+    
+}

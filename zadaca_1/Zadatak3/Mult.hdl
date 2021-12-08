@@ -1,0 +1,96 @@
+CHIP Mult{
+    IN a[16], b[16];
+    OUT out[16];
+    
+    PARTS:
+    //prvo množenje i shift
+    Mux16(a = false, b = a, sel = b[0], out = add1);
+    BitShiftL(in = a, out = shift1);
+    
+    //drugo množenje i shift
+    Mux16(a = false, b = shift1, sel = b[1], out = add2);
+    BitShiftL(in = shift1, out = shift2);
+    
+    //trece mnozenje i shift
+    Mux16(a = false, b = shift2, sel = b[2], out = add3);
+    BitShiftL(in = shift2, out = shift3);
+    
+    //cetvrto mnozenje i shift
+    Mux16(a = false, b = shift3, sel = b[3], out = add4);
+    BitShiftL(in = shift3, out = shift4);
+    
+    //peto mnozenje i shift
+    Mux16(a = false, b = shift4, sel = b[4], out = add5);
+    BitShiftL(in = shift4, out = shift5);
+    
+    //šesto množenje i shift
+    Mux16(a = false, b = shift5, sel = b[5], out = add6);
+    BitShiftL(in = shift5, out = shift6);
+    
+    //sedmo množenje i shift
+    Mux16(a = false, b = shift6, sel = b[6], out = add7);
+    BitShiftL(in = shift6, out = shift7);
+    
+    //osmo množenje i shift
+    Mux16(a = false, b = shift7, sel = b[7], out = add8);
+    BitShiftL(in = shift7, out = shift8);
+    
+    //deveto množenje i shift
+    Mux16(a = false, b = shift8, sel = b[8], out = add9);
+    BitShiftL(in = shift8, out = shift9);
+    
+    //deseto množenje i shift
+    Mux16(a = false, b = shift9, sel = b[9], out = add10);
+    BitShiftL(in = shift9, out = shift10);
+    
+    //11 množenje i shift
+    Mux16(a = false, b = shift10, sel = b[10], out = add11);
+    BitShiftL(in = shift10, out = shift11);
+    
+    //12 množenje i shift
+    Mux16(a = false, b = shift11, sel = b[11], out = add12);
+    BitShiftL(in = shift11, out = shift12);
+    
+    //13 množenje i shift
+    Mux16(a = false, b = shift12, sel = b[12], out = add13);
+    BitShiftL(in = shift12, out = shift13);
+    
+    //14 množenje i shift
+    Mux16(a = false, b = shift13, sel = b[13], out = add14);
+    BitShiftL(in = shift13, out = shift14);
+    
+    //15 množenje i shift
+    Mux16(a = false, b = shift14, sel = b[14], out = add15);
+    BitShiftL(in = shift14, out = shift15);
+    
+    //zadnje množenje
+    Mux16(a = false, b = shift15, sel = b[15], out = add16);
+    
+    
+    
+    //zbroj svih rezultata
+    Add16(a = add1, b = add2, out = nextadd1);
+    Add16(a = add3, b = add4, out = nextadd2);
+    Add16(a = add5, b = add6, out = nextadd3);
+    Add16(a = add7, b = add8, out = nextadd4);
+    Add16(a = add9, b = add10, out = nextadd5);
+    Add16(a = add11, b = add12, out = nextadd6);
+    Add16(a = add13, b = add14, out = nextadd7);
+    Add16(a = add15, b = add16, out = nextadd8);
+    
+    //zbroj zbrojeva
+    Add16(a = nextadd1, b = nextadd2, out = out1);
+    Add16(a = nextadd3, b = nextadd4, out = out2);
+    Add16(a = nextadd5, b = nextadd6, out = out3);
+    Add16(a = nextadd7, b = nextadd8, out = out4);
+    
+    //novi zbroj
+    Add16(a = out1, b = out2, out = almostout1);
+    Add16(a = out3, b = out4, out = almostout2);
+    
+    //zadnji zbroj
+    Add16(a = almostout1, b = almostout2 , out = out);
+    
+    
+    
+}
