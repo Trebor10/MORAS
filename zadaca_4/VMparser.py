@@ -68,7 +68,6 @@ class Parser:
         #      vrsta naredbe je u njoj.
         #   3. Parsiramo naredbu i zapisujemo odgovarajuci asemblerski kod.
         l = line.split("//")[0].split()
-        print(l)
         if len(l) == 0 or len(l[0]) == 0:
             return ""
 
