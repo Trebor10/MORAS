@@ -57,15 +57,12 @@ function BS 3
     goto WHILE
     
     label RET
-    push argument 0
     push local 2
-    add
     return
     
     
     label NOT_FOUND
-    push constant 0
     push constant 1
-    sub
+    neg
     return
       
