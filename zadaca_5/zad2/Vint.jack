@@ -1,0 +1,167 @@
+class Vint
+{
+    field int cap;
+    field Array vector;
+    
+    method int pow2(int n)
+    {
+        var int i, pow_res;
+        let pow_res = 1;
+        while (i < n)
+        {
+            let pow_res = pow_res * 2;
+            let i = i + 1;
+        }
+        return pow_res;
+    }
+    
+    method int len()
+    {
+        return cap;
+    }
+    
+    constructor Vint new(int n)
+    {
+        var int i;
+        
+        if (n < 0)
+        {
+            let cap = 1;
+            let vector = Array.new(cap);
+            return this;
+        }
+        
+        let cap = pow2(n);
+        let vector = Array.new(cap);
+        return this;
+    }
+    
+    method void set(int k, int v)
+    {
+        if ((k < cap) & (k > -1))
+        {
+            let vector[k] = v;
+            return;
+        }
+        
+        do Output.printString("Invalid key");
+        do Output.println();
+        
+        return;
+    }
+    
+    method int get(int k)
+    {
+        if ((k < cap) & (k > -1))
+        {
+            return vector[k];
+        }
+        
+        do Output.printString("Invalid key");
+        do Output.println();
+        
+        return -1;
+    }
+    
+    method void resize(int m)
+    {
+        var Array temp;
+        var int i, hp;
+        
+        let temp = Array.new(cap);
+        while (i < cap)
+        {
+            let temp[i] = vector[i];
+            let i = i + 1;
+        }
+        let hp = Math.min(pow2(m), cap);
+        let cap = pow2(m);
+        
+        let i = 0;
+        let vector = Array.new(cap);
+        
+        while (i < hp)
+        {
+            let vector[i] = temp[i];
+            let i = i + 1;
+        }
+        
+        do temp.dispose();
+        
+        return;
+    }
+    
+    function bool is_eq(Vint A, Vint B)
+    {
+        var int i;
+        
+        if (~(A.len() = B.len()))
+        {
+            return false;
+        }
+        
+        while (i < A.len())
+        {
+            if(~(A.get(i) = B.get(i)))
+            {
+                return false;
+            }
+            
+            let i = i + 1;
+        }
+        return true;
+    }
+    
+    function bool elems(Vint A, Vint B)
+    {
+        var Array Ah, Bh;
+        var int i;
+        let Ah = Array.new(A.len());
+        let Bh = Array.new(B.len());
+        
+        if (~(A.len() = B.len()))
+        {
+            return false;
+        }
+        
+        while (i < A.len())
+        {
+            let Ah[i] = A.get(i);
+            let i = i + 1;
+        }
+        
+        let i = 0;
+        
+        while (i < B.len())
+        {
+            let Bh[i] = B.get(i);
+            let i = i + 1;
+        }
+        
+        do QuickSort.qsort(Ah, 0, A.len() - 1);
+        do QuickSort.qsort(Bh, 0, B.len() - 1);
+        
+        let i = 0;
+        
+        while (i < A.len())
+        {
+            if(~(Ah[i] = Bh[i]))
+            {
+                return false;
+            }
+            let i = i + 1;
+        }
+        
+        
+        return true;
+    }
+
+}
+
+
+
+
+
+
+
+

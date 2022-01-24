@@ -1,0 +1,59 @@
+class Graph
+{
+
+	function int f (int x)
+	{
+		return (((x*x)/3) -(2*x) + 5);
+	}
+    
+    function void graph ()
+    {
+        
+        var Array x_cord, y_cord;
+        var int i, j, offset;
+        
+        let x_cord = Array.new(65);
+        let y_cord = Array.new(65);
+        let i = -32;
+        let offset = 128;
+        
+        while (i < 33)
+        {
+            
+            let x_cord[j] = i;
+            let y_cord[j] = Graph.f(i);
+            
+            let i = i + 1;
+            let j = j + 1;
+        }
+        
+        let i = 0;
+        
+
+        
+        do Screen.setColor(true);
+        do Screen.drawLine(0, 128, 255, 128);
+        do Screen.drawLine(128, 0, 128, 255);
+        
+        while (i < 64)
+        {
+            
+            if ((((-y_cord[i]) + offset) <  256)  & (((-y_cord[i]) + offset) > -1) )
+            {
+                if ((((-y_cord[i+1]) + offset) <  256)  & (((-y_cord[i+1]) + offset) > -1) )
+                {
+                    do Screen.setColor(true);
+                
+                    if ((y_cord[i] > -33) & (y_cord[i] < 33) & (y_cord[i+1] > -33) & (y_cord[i+1] < 33) )
+                    {
+                        do Screen.drawLine((x_cord[i] + offset), ((-y_cord[i]) + offset), (x_cord[i+1] + offset), ((-y_cord[i+1]) + offset));
+                    }
+                }
+            }
+            let i = i + 1;
+        }
+        
+        return;
+    }
+
+}

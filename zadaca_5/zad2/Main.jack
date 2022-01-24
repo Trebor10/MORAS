@@ -1,0 +1,104 @@
+class Main
+{
+
+    function void main()
+    {
+    
+        var Vint A, B;
+        var int i;
+        let A = Vint.new(3);
+        let B = Vint.new(2);
+        
+        do Output.printInt(A.len());
+        do Output.println();
+        
+        do A.set(2,3);
+        do A.set(6,4);
+        do A.set(-1,5);
+        do A.set(9,5);
+        do B.set(3,3);
+        do B.set(0,4);
+        
+        do Output.printInt(A.get(6));
+        do Output.println();
+        do Output.printInt(B.get(4));
+        do Output.println();
+        
+        do B.resize(3);
+        
+        if (Vint.elems(A, B) = true)
+        {
+            do Output.printString("Vektori imaju iste elemente.");
+            do Output.println();
+        }
+        
+        
+        while (i < A.len())
+        {
+            do Output.printInt(A.get(i));
+            do Output.printString(" ");
+            let i = i + 1;
+        }
+        
+        let i = 0;
+        do Output.println();
+        
+        while (i < B.len())
+        {
+            do Output.printInt(B.get(i));
+            do Output.printString(" ");
+            let i = i + 1;
+        }
+        
+        do Output.println();
+        
+        if (Vint.is_eq(A, B) = false)
+        {
+            do Output.printString("Vektori nisu jendaki.");
+            do Output.println();
+        }
+        
+        if (Vint.is_eq(A, A) = true)
+        {
+            do Output.printString("Vektori su jednaki.");
+            do Output.println();
+        }
+        
+        do A.resize(2);
+        do B.resize(4);
+        
+        let i = 0;
+        
+        while (i < A.len())
+        {
+            do Output.printInt(A.get(i));
+            do Output.printString(" ");
+            let i = i + 1;
+        }
+        
+        let i = 0;
+        do Output.println();
+        
+        while (i < B.len())
+        {
+            do Output.printInt(B.get(i));
+            do Output.printString(" ");
+            let i = i + 1;
+        }
+        
+        do Output.println();
+        
+        do B.resize(-2);
+        let i = 0;
+        
+        while (i < B.len())
+        {
+            do Output.printInt(B.get(i));
+            do Output.printString(" ");
+            let i = i + 1;
+        }
+        
+        return;
+    }
+
+}

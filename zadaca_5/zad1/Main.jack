@@ -1,0 +1,38 @@
+class Main
+{
+
+    function void main()
+    {
+    
+        var Array A;
+        var int high, low, i;
+        
+        let high = Keyboard.readInt("Unesite duljinu polja: ");
+        let A = Array.new(high);
+        
+        while (i < high)
+        {
+            do Output.printString("Unesite ");
+            do Output.printInt(i+1);
+            do Output.printString(". broj:");
+            let A[i] = Keyboard.readInt("");
+            let i = i + 1;
+        }
+    
+        do QuickSort.qsort(A, low, high - 1);
+        
+        do Output.println();
+        
+        let i = 0;
+        
+        while (i < high)
+        {
+            do Output.printInt(A[i]);
+            do Output.printString(" ");
+            let i = i + 1;
+        }
+        
+        return;
+    }
+
+}
